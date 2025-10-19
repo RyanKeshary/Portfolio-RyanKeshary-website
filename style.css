@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.944);
+}
+
+.matrix-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+img {
+    height: 90vh;
+    width: auto;
+    animation: wave 5s ease-in-out infinite;
+}
+
+.pill-btn {
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.474);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 250ms ease-in-out;
+    animation: wave 5s ease-in-out infinite;
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.388);
+
+}
+
+.blue-pill {
+    right: 35%;
+    bottom: 34%;
+    background-color: rgba(21, 145, 247, 0.927);
+    transform: rotate(7deg);
+}
+
+.red-pill {
+    left: 35%;
+    bottom: 34%;
+    background-color: rgba(255, 0, 0, 0.968);
+    transform: rotate(-7deg);
+}
+
+.pill-btn:hover {
+    transform: scale(1.1) !important;
+}
+
+.pill-btn:active {
+    transform: scale(0.9) !important;
+}
+
+/* Pause image animation when hovering over image or any button */
+.matrix-container:has(img:hover) img,
+.matrix-container:has(.pill-btn:hover) img {
+    animation-play-state: paused;
+}
+
+/* Pause all button animations when hovering over image or any button */
+.matrix-container:has(img:hover) .pill-btn,
+.matrix-container:has(.pill-btn:hover) .pill-btn {
+    animation-play-state: paused;
+}
+
+@keyframes wave {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); }
+    20%  { transform: translateY(-12px) rotate(-3deg) scale(1.02); }
+    40%  { transform: translateY(6px) rotate(2deg) scale(0.99); }
+    60%  { transform: translateY(-8px) rotate(-1.5deg) scale(1.01); }
+    80%  { transform: translateY(4px) rotate(2deg) scale(0.995); }
+    100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* Responsive breakpoints
+   mobile: 320px - 600px
+   tablet: 600px - 1024px
+   desktop: 1024px - 1440px
+*/
+
+/* Mobile: stack vertically, shrink image and buttons */
+@media (max-width: 600px) {
+    body {
+        background-color: #000;
+    }
+
+    .matrix-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    img {
+        height: 50vh;
+        max-width: 95vw;
+        object-fit: contain;
+        animation: wave 7s ease-in-out infinite;
+    }
+
+    .pill-btn {
+        position: relative;
+        margin: 0.6rem 0;
+        border-radius: 16px;
+        padding: 10px 18px;
+        font-size: 1rem;
+        transition: transform 250ms ease-in-out;
+        animation: updown 7s ease-in-out infinite;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* center buttons underneath image */
+    .red-pill, .blue-pill {
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+
+    
+}
+
+/* Tablet: moderate scaling and reposition buttons to edges */
+@media (min-width: 601px) and (max-width: 1024px) {
+    img {
+        height: auto;
+        max-width: 95%;
+        animation: wave 7s ease-in-out infinite;
+    }
+
+    .pill-btn {
+        padding: 10px 20px;
+        font-size: 1.05rem;
+        border-radius: 18px;
+        animation: wave 7s ease-in-out infinite;
+    }
+
+    .blue-pill {
+        right: 25%;
+        bottom: 40%;
+        transform: rotate(7deg);
+    }
+
+    .red-pill {
+        left: 25%;
+        bottom: 40%;
+        transform: rotate(-7deg);
+    }
+}
