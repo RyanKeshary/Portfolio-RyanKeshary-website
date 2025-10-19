@@ -36,21 +36,20 @@ img {
     transition: transform 250ms ease-in-out;
     animation: wave 5s ease-in-out infinite;
     box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.388);
-
 }
 
 .blue-pill {
     right: 35%;
     bottom: 34%;
     background-color: rgba(21, 145, 247, 0.927);
-    transform: rotate(7deg);
+    animation: wave-blue 5s ease-in-out infinite;
 }
 
 .red-pill {
     left: 35%;
     bottom: 34%;
     background-color: rgba(255, 0, 0, 0.968);
-    transform: rotate(-7deg);
+    animation: wave-red 5s ease-in-out infinite;
 }
 
 .pill-btn:hover {
@@ -59,6 +58,133 @@ img {
 
 .pill-btn:active {
     transform: scale(0.9) !important;
+}
+
+/* Social Sidebar */
+.social-sidebar {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    position: relative;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+/* LinkedIn hover effect */
+.social-link:nth-child(1):hover {
+    color: #0A66C2;
+    transform: translateX(-5px);
+}
+
+.social-link:nth-child(1):hover::before {
+    background: rgba(10, 102, 194, 0.2);
+    box-shadow: 0 0 20px rgba(10, 102, 194, 0.6);
+    transform: scale(1.3);
+}
+
+/* X (Twitter) hover effect */
+.social-link:nth-child(2):hover {
+    color: #ffffff;
+    transform: translateX(-5px);
+}
+
+.social-link:nth-child(2):hover::before {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    transform: scale(1.3);
+}
+
+/* GitHub hover effect */
+.social-link:nth-child(3):hover {
+    color: #9a7cf6;
+    transform: translateX(-5px);
+}
+
+.social-link:nth-child(3):hover::before {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    transform: scale(1.3);
+}
+
+/* Email hover effect */
+.social-link:nth-child(4):hover {
+    color: #EA4335;
+    transform: translateX(-5px);
+}
+
+.social-link:nth-child(4):hover::before {
+    background: rgba(234, 67, 53, 0.2);
+    box-shadow: 0 0 20px rgba(234, 67, 53, 0.6);
+    transform: scale(1.3);
+}
+
+.social-link svg {
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Copy Notification Toast */
+.copy-notification {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: rgba(34, 197, 94, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.copy-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.copy-notification svg {
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 /* Pause image animation when hovering over image or any button */
@@ -73,22 +199,99 @@ img {
     animation-play-state: paused;
 }
 
+/* Desktop wave animation - more dynamic */
 @keyframes wave {
     0%   { transform: translateY(0) rotate(0deg) scale(1); }
-    20%  { transform: translateY(-12px) rotate(-3deg) scale(1.02); }
-    40%  { transform: translateY(6px) rotate(2deg) scale(0.99); }
-    60%  { transform: translateY(-8px) rotate(-1.5deg) scale(1.01); }
-    80%  { transform: translateY(4px) rotate(2deg) scale(0.995); }
+    15%  { transform: translateY(-15px) rotate(-4deg) scale(1.03); }
+    30%  { transform: translateY(8px) rotate(3deg) scale(0.98); }
+    45%  { transform: translateY(-10px) rotate(-2deg) scale(1.02); }
+    60%  { transform: translateY(6px) rotate(2.5deg) scale(0.99); }
+    75%  { transform: translateY(-5px) rotate(-1deg) scale(1.01); }
+    90%  { transform: translateY(3px) rotate(1.5deg) scale(0.995); }
     100% { transform: translateY(0) rotate(0deg) scale(1); }
 }
 
-/* Responsive breakpoints
-   mobile: 320px - 600px
-   tablet: 600px - 1024px
-   desktop: 1024px - 1440px
-*/
+/* Blue pill animation - maintains tilt */
+@keyframes wave-blue {
+    0%   { transform: translateY(0) rotate(7deg) scale(1); }
+    15%  { transform: translateY(-15px) rotate(3deg) scale(1.03); }
+    30%  { transform: translateY(8px) rotate(10deg) scale(0.98); }
+    45%  { transform: translateY(-10px) rotate(5deg) scale(1.02); }
+    60%  { transform: translateY(6px) rotate(9.5deg) scale(0.99); }
+    75%  { transform: translateY(-5px) rotate(6deg) scale(1.01); }
+    90%  { transform: translateY(3px) rotate(8.5deg) scale(0.995); }
+    100% { transform: translateY(0) rotate(7deg) scale(1); }
+}
 
-/* Mobile: stack vertically, shrink image and buttons */
+/* Red pill animation - maintains tilt */
+@keyframes wave-red {
+    0%   { transform: translateY(0) rotate(-7deg) scale(1); }
+    15%  { transform: translateY(-15px) rotate(-11deg) scale(1.03); }
+    30%  { transform: translateY(8px) rotate(-4deg) scale(0.98); }
+    45%  { transform: translateY(-10px) rotate(-9deg) scale(1.02); }
+    60%  { transform: translateY(6px) rotate(-4.5deg) scale(0.99); }
+    75%  { transform: translateY(-5px) rotate(-8deg) scale(1.01); }
+    90%  { transform: translateY(3px) rotate(-5.5deg) scale(0.995); }
+    100% { transform: translateY(0) rotate(-7deg) scale(1); }
+}
+
+/* Up-down animation for mobile/tablet buttons */
+@keyframes updown {
+    0%   { transform: translateY(0) scale(1); }
+    25%  { transform: translateY(-8px) scale(1.02); }
+    50%  { transform: translateY(0) scale(1); }
+    75%  { transform: translateY(8px) scale(0.98); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Tablet specific */
+@media (min-width: 601px) and (max-width: 1024px) {
+    img {
+        height: auto;
+        max-width: 95%;
+        animation: wave 6s ease-in-out infinite;
+    }
+
+    .pill-btn {
+        padding: 10px 20px;
+        font-size: 1.05rem;
+        border-radius: 18px;
+        animation: wave 6s ease-in-out infinite;
+    }
+
+    .blue-pill {
+        right: 25%;
+        bottom: 40%;
+    }
+
+    .red-pill {
+        left: 25%;
+        bottom: 40%;
+    }
+
+    .social-sidebar {
+        top: 2rem;
+        right: 50%;
+        transform: translateX(50%);
+        flex-direction: row;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        gap: 1.5rem;
+    }
+
+    .social-link:nth-child(1):hover,
+    .social-link:nth-child(2):hover,
+    .social-link:nth-child(3):hover,
+    .social-link:nth-child(4):hover {
+        transform: translateY(-5px);
+    }
+
+    .copy-notification {
+        top: 6rem;
+    }
+}
+
+/* Mobile specific */
 @media (max-width: 600px) {
     body {
         background-color: #000;
@@ -105,7 +308,7 @@ img {
         height: 50vh;
         max-width: 95vw;
         object-fit: contain;
-        animation: wave 7s ease-in-out infinite;
+        animation: wave 6s ease-in-out infinite;
     }
 
     .pill-btn {
@@ -115,44 +318,54 @@ img {
         padding: 10px 18px;
         font-size: 1rem;
         transition: transform 250ms ease-in-out;
-        animation: updown 7s ease-in-out infinite;
+        animation: updown 4s ease-in-out infinite;
         box-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
 
-    /* center buttons underneath image */
-    .red-pill, .blue-pill {
+    .red-pill {
         left: auto;
         right: auto;
         bottom: auto;
     }
 
-    
-}
-
-/* Tablet: moderate scaling and reposition buttons to edges */
-@media (min-width: 601px) and (max-width: 1024px) {
-    img {
-        height: auto;
-        max-width: 95%;
-        animation: wave 7s ease-in-out infinite;
-    }
-
-    .pill-btn {
-        padding: 10px 20px;
-        font-size: 1.05rem;
-        border-radius: 18px;
-        animation: wave 7s ease-in-out infinite;
-    }
-
     .blue-pill {
-        right: 25%;
-        bottom: 40%;
-        transform: rotate(7deg);
+        left: auto;
+        right: auto;
+        bottom: auto;
+        animation-delay: 0.3s;
     }
 
-    .red-pill {
-        left: 25%;
-        bottom: 40%;
-        transform: rotate(-7deg);
+    .social-sidebar {
+        top: 1.5rem;
+        right: 50%;
+        transform: translateX(50%);
+        flex-direction: row;
+        padding: 0.75rem 1rem;
+        gap: 1.25rem;
+    }
+
+    .social-link {
+        width: 38px;
+        height: 38px;
+    }
+
+    .social-link:nth-child(1):hover,
+    .social-link:nth-child(2):hover,
+    .social-link:nth-child(3):hover,
+    .social-link:nth-child(4):hover {
+        transform: translateY(-5px);
+    }
+
+    .social-link svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .copy-notification {
+        top: 5rem;
+        right: 1rem;
+        left: 1rem;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.875rem;
     }
 }
